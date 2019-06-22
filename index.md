@@ -244,6 +244,20 @@ $ pandoc -f markdown -t rst MANUAL.txt -o users-guide.rst
 
 ---
 
+# Markdown と reStructuredText の違い
+
+- Markdown
+    - Web業界で大人気（それ以外ではあんまり知られてない）
+    - 元々はHTML出力が目的（今は広がっている）
+    - 記法の記述能力：弱い
+    - 「Markdown方言」問題
+- reStructuredText (reST) 
+    - 記法の記述能力：高い
+    - ドキュメンテーション用途を想定している
+    - Sphinxの標準記法（Python界では知られている？）
+
+---
+
 
 ![](img/pandoc-doc-ja-translation3_sphinxintl.jpg){.stretch}
 
@@ -407,6 +421,18 @@ $ sphinx-intl update -p _build/gettext -l ja_JP  # Bad
 - 翻訳の品質向上
     - 用語集・翻訳メモリなどがうまく使えていない
     - 「良い翻訳」のノウハウが不足している
+
+---
+
+# 紹介：ドキュメンテーションの世界的なコミュニティ
+
+[Write the Docs](https://www.writethedocs.org/)
+
+- カンファレンス・ミートアップ
+    - 2019: 米ポートランド、リトアニア、チェコ、オーストラリア
+- 学習リソース
+- Slack・情報共有
+- 仕事紹介
 
 ---
 
