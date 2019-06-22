@@ -275,6 +275,10 @@
 </ul></li>
 </ul>
 </section>
+<section class="slide level1">
+
+<img data-src="img/pandoc-doc-ja-translation1_githubjgm.jpg" class="stretch" />
+</section>
 <section id="jgmpandoc-から-manual.txt-を取得する" class="slide level1">
 <h1>jgm/pandoc から MANUAL.txt を取得する</h1>
 <ul>
@@ -286,6 +290,10 @@
 <li>参考: <a href="https://qiita.com/sotarok/items/0d525e568a6088f6f6bb">Git submodule の基礎 - Qiita</a></li>
 </ul>
 </section>
+<section class="slide level1">
+
+<img data-src="img/pandoc-doc-ja-translation2_pandoc.jpg" class="stretch" />
+</section>
 <section id="pandoc-markdown---restructuredtext" class="slide level1">
 <h1>Pandoc: Markdown -&gt; reStructuredText</h1>
 <pre><code>$ pandoc -f markdown -t rst MANUAL.txt -o users-guide.rst</code></pre>
@@ -295,6 +303,10 @@
 <li><code>-o</code> 出力ファイル</li>
 <li>実際にはMakefileに書いている</li>
 </ul>
+</section>
+<section class="slide level1">
+
+<img data-src="img/pandoc-doc-ja-translation3_sphinxintl.jpg" class="stretch" />
 </section>
 <section id="sphinx-intl-翻訳ファイル生成-potpo" class="slide level1">
 <h1>sphinx-intl: 翻訳ファイル生成 (pot/po)</h1>
@@ -312,6 +324,10 @@ $ sphinx-intl update -p _build/gettext -l ja  # </code></pre>
 <h1>sphinx-intl (gettext) の仕組み</h1>
 <p><img data-src="img/gettext_translation.png" /></p>
 <p><a href="http://www.sphinx-doc.org/ja/master/usage/advanced/intl.html">国際化 — Sphinx 3.0.0+/d6dff753 ドキュメント</a></p>
+</section>
+<section class="slide level1">
+
+<img data-src="img/pandoc-doc-ja-translation4_transifex.jpg" class="stretch" />
 </section>
 <section id="transifex-翻訳作業用のwebアプリ" class="slide level1">
 <h1>Transifex: 翻訳作業用のWebアプリ</h1>
@@ -341,6 +357,10 @@ $ sphinx-intl update -p _build/gettext -l ja  # </code></pre>
 <section id="デモtransifex上での翻訳" class="slide level1">
 <h1>デモ：Transifex上での翻訳</h1>
 </section>
+<section class="slide level1">
+
+<img data-src="img/pandoc-doc-ja-translation5_sphinx.jpg" class="stretch" />
+</section>
 <section id="sphinx-htmlを生成" class="slide level1">
 <h1>Sphinx: HTMLを生成</h1>
 <ul>
@@ -348,6 +368,10 @@ $ sphinx-intl update -p _build/gettext -l ja  # </code></pre>
 <li>sphinx-intl用に <code>-D language='ja'</code> のオプションを追加</li>
 </ul>
 <pre><code>$ make -e SPHINXOPTS=&quot;-D language=&#39;ja&#39;&quot; html</code></pre>
+</section>
+<section class="slide level1">
+
+<img data-src="img/pandoc-doc-ja-translation6_rtd.jpg" class="stretch" />
 </section>
 <section id="read-the-docs-ci-ホスティング" class="slide level1">
 <h1>Read the Docs: CI &amp; ホスティング</h1>

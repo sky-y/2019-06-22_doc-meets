@@ -120,8 +120,6 @@ center: false
 
 ---
 
-
-
 # Pandocユーザーズガイド 日本語訳の改訂作業
 
 ---
@@ -216,12 +214,20 @@ center: false
 
 ---
 
+![](img/pandoc-doc-ja-translation1_githubjgm.jpg){.stretch}
+
+---
+
 # jgm/pandoc から MANUAL.txt を取得する
 
 - git submodule を利用して、リポジトリを同期
     - MANUAL.txtを特定バージョン (tag) に固定できる
     - 例: `2.7.2`
 - 参考: [Git submodule の基礎 - Qiita](https://qiita.com/sotarok/items/0d525e568a6088f6f6bb)
+
+---
+
+![](img/pandoc-doc-ja-translation2_pandoc.jpg){.stretch}
 
 ---
 
@@ -235,6 +241,11 @@ $ pandoc -f markdown -t rst MANUAL.txt -o users-guide.rst
 - `-t rst`: 出力形式はreStructuredText
 - `-o` 出力ファイル
 - 実際にはMakefileに書いている
+
+---
+
+
+![](img/pandoc-doc-ja-translation3_sphinxintl.jpg){.stretch}
 
 ---
 
@@ -258,6 +269,11 @@ $ sphinx-intl update -p _build/gettext -l ja  #
 ![](img/gettext_translation.png)
 
 [国際化 — Sphinx 3.0.0+/d6dff753 ドキュメント](http://www.sphinx-doc.org/ja/master/usage/advanced/intl.html)
+
+---
+
+
+![](img/pandoc-doc-ja-translation4_transifex.jpg){.stretch}
 
 ---
 
@@ -286,6 +302,11 @@ $ sphinx-intl update -p _build/gettext -l ja  #
 
 # デモ：Transifex上での翻訳
 
+
+---
+
+![](img/pandoc-doc-ja-translation5_sphinx.jpg){.stretch}
+
 ---
 
 # Sphinx: HTMLを生成
@@ -296,6 +317,10 @@ $ sphinx-intl update -p _build/gettext -l ja  #
 ```
 $ make -e SPHINXOPTS="-D language='ja'" html
 ```
+
+---
+
+![](img/pandoc-doc-ja-translation6_rtd.jpg){.stretch}
 
 ---
 
