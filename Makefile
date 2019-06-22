@@ -1,7 +1,9 @@
 .PHONY: build
 build: index.html
 %.html: %.md custom.css
-	pandoc -f markdown+emoji $< -t revealjs -o $@ -s -c custom.css
+	pandoc -f markdown+emoji $< \
+	       -t revealjs -o $@ \
+		   -s -c custom.css
 
 .PHONY: sign
 sign: sign.pptx

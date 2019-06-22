@@ -152,18 +152,230 @@ center: false
 
 ---
 
-# 改訂版ユーザーズガイドのシステム構成
+# 改訂版・Pandocユーザーズガイド
 
-- GitHub: User's Guide原文 (jgm/pandoc)
-- Pandoc: Markdown -> reStructuredText
-- sphinx-intl: 翻訳ファイル生成 (pot/po)
-- Transifex: Webアプリ (共同で翻訳作業)
-- Sphinx: HTMLを生成
-- Read the Docx: CI & ホスティング
+- 作業中・未完成のものです
+- <https://pandoc-doc-ja.readthedocs.io/ja/latest/>
+- GitHub: [pandoc-jp/pandoc-doc-ja](https://github.com/pandoc-jp/pandoc-doc-ja)
 
 ---
 
-<!-- TODO -->
+# 改訂版ユーザーズガイドのシステム構成
+
+---
+
+![](img/pandoc-doc-ja-translation.jpg){.stretch}
+
+---
+
+# GitHub (jgm/pandoc): User's Guide原文 
+
+- [jgm/pandoc](https://github.com/jgm/pandoc): Pandoc本体のリポジトリ
+- [MANUAL.txt](https://github.com/jgm/pandoc/blob/master/MANUAL.txt)
+    - Pandoc User's Guideの原稿となるMarkdown文書
+- **Pandoc's MarkdownというMarkdown方言で書かれている**
+    - → Pandocで変換するしかない
+
+---
+
+# MANUAL.txtを翻訳・Webサイト生成したいが……
+
+- Pandocの出力は原則1ファイル
+    - 複数ページのWebサイトを構築するためには、別のツールの助けが必要
+- Markdownを翻訳する手段: [po4a](https://po4a.org/index.php.ja)
+    - gettextが想定しないドキュメントでの翻訳が目標
+    - 情報源が少ないので、今回は見送り（future work）
+
+---
+
+# そうだ、Sphinxを使おう！
+
+- Sphinx: ドキュメントビルダー
+    - sphinx-intl: gettextベースの翻訳ユーティリティ
+    - 情報源・実績・エコシステムが豊富
+    - **ただし reStructuredText (reST) が前提**
+- 最大の採用理由：Pandocユーザ会のメンバーにSphinxメンテナがいらっしゃる！
+    - 小宮さん (`@tk0miya`)
+
+---
+
+# 今回のプロジェクトでの判断
+
+- Sphinx + sphinx-intl を採用
+- MANUAL.txt (Pandoc's Markdown) を reST に変換する
+    - ここでPandocが活躍！（ただし1行でおわり）
+- Read the Docs でビルド（CI）＆ホスティング
+    - Sphinxを公式サポート → 気軽に導入できる
+    - GitHubリポジトリから自動的にビルド
+
+---
+
+# jgm/pandoc から MANUAL.txt を取得する
+
+- git submodule を利用して、リポジトリを同期
+    - MANUAL.txtを特定バージョン (tag) に固定できる
+    - 例: `2.7.2`
+- 参考: [Git submodule の基礎 - Qiita](https://qiita.com/sotarok/items/0d525e568a6088f6f6bb)
+
+---
+
+# Pandoc: Markdown -> reStructuredText
+
+```
+$ pandoc -f markdown -t rst MANUAL.txt -o users-guide.rst
+```
+
+- `-f markdown`: 入力形式はPandoc's Markdown
+- `-t rst`: 出力形式はreStructuredText
+- `-o` 出力ファイル
+- 実際にはMakefileに書いている
+
+---
+
+# sphinx-intl: 翻訳ファイル生成 (pot/po)
+
+- [国際化 — Sphinx 3.0.0+/d6dff753 ドキュメント](http://www.sphinx-doc.org/ja/master/usage/advanced/intl.html)
+- Sphinx用翻訳ユーティリティ（gettextを内部で用いている）
+
+```
+# potファイル作成
+$ make gettext
+
+# poファイル作成
+$ sphinx-intl update -p _build/gettext -l ja  # 
+```
+
+---
+
+# sphinx-intl (gettext) の仕組み
+
+![](img/gettext_translation.png)
+
+[国際化 — Sphinx 3.0.0+/d6dff753 ドキュメント](http://www.sphinx-doc.org/ja/master/usage/advanced/intl.html)
+
+---
+
+# Transifex: 翻訳作業用のWebアプリ
+
+- Webベースで翻訳作業 → poファイル生成ができる
+- OSSプロジェクトは無料で利用可能（要登録）
+- 複数ユーザで翻訳作業が可能
+- Sphinxとも相性が良い（専用ユーティリティツールが存在）
+
+---
+
+![transifex-pandoc](img/transifex-pandoc.png)
+
+---
+
+# 翻訳からビルドまでの流れ
+
+1. Sphinx(-intl) でpoファイルを生成
+2. poファイルをTransifexにアップロード
+3. Transifex（Webブラウザ上）でひたすら翻訳する
+4. 翻訳済poファイルをダウンロードする
+5. Sphinx(-intl) でHTMLをビルド
+
+---
+
+# デモ：Transifex上での翻訳
+
+---
+
+# Sphinx: HTMLを生成
+
+- 基本的には `make html` でビルド
+- sphinx-intl用に `-D language='ja'` のオプションを追加
+
+```
+$ make -e SPHINXOPTS="-D language='ja'" html
+```
+
+---
+
+# Read the Docs: CI & ホスティング
+
+[Read the Docs](https://readthedocs.org/)
+
+- ドキュメントのホスティングサイト
+    - オープンソース向けは無料でホスティング可能
+- ドキュメントビルダーは Sphinx と MkDocs (Markdown向け) に対応
+- GitHubのpushを検出するhook → 自動ビルド
+- そのまま公開できる
+
+---
+
+# 改訂版・Pandocユーザーズガイド
+
+- 作業中・未完成のものです
+- <https://pandoc-doc-ja.readthedocs.io/ja/latest/>
+- GitHub: [pandoc-jp/pandoc-doc-ja](https://github.com/pandoc-jp/pandoc-doc-ja)
+
+---
+
+# 失敗談・議論・今後の課題
+
+---
+
+# 失敗談：ロケール設定をミスった (1)
+
+- 言語設定は `ja` (日本語)
+    - `ja_JP` (日本語・日本) はRead the Docsで対応していない（！）
+    - 最初、後者の設定にしていたため、あとで`ja_JP` から `ja` に諸々データを移植した
+
+```
+$ sphinx-intl update -p _build/gettext -l ja     # Good
+$ sphinx-intl update -p _build/gettext -l ja_JP  # Bad
+```
+
+---
+
+# 失敗談：ロケール設定をミスった (2)
+
+- 結果として、**Transifex（後述）の翻訳メタデータを飛ばした（泣）**
+    - 翻訳結果は残ったが、「誰がいつ翻訳したか」が分からなくなった
+
+---
+
+# 議論：機械翻訳の可否
+
+- オープンソースプロジェクトに、**一切**機械翻訳を導入すべきでない？
+    - 「Ubuntu機械翻訳おじさん」事件
+    - [Ubuntu英日翻訳にGoogle翻訳の成果物を突っ込む人物が現れライセンスがなんじゃもんじゃでつらい - Togetter](https://togetter.com/li/1084225)
+- ライセンス違反は論外として……
+- Q「読者がドキュメントを読んで、機械翻訳かどうか判別できるか？」
+
+---
+
+# 藤原の見解
+
+- 「翻訳プロジェクトの責任者が、翻訳責任を持つ」
+    - 責任者は、ライセンス違反になるような機械翻訳を排除する責任がある
+    - 責任を取るのが人間の最後の仕事
+    - （実務上は、機械翻訳されたものを厳密に100%排除するのは原理上無理では？）
+- 本プロジェクトでの周知事項
+    - **参考として**機械翻訳を利用することは差し支えない
+    - **最終的には、自力で翻訳すること**
+
+---
+
+# 今後の課題 (1)
+
+- モチベーション管理
+    - 藤原自身と、翻訳チームメンバー
+    - 停滞気味なので、うまく進む仕掛けを仕込みたい
+- 本当の意味で継続的インテグレーション(CI)を実現したい
+    - まだ藤原が手作業でやっている部分も多い
+    - 特にTransifex（poファイル）まわりは手動
+    - Pandocのバージョンアップ追随には必須
+
+---
+
+# 今後の課題 (2)
+
+- 翻訳の品質向上
+    - 用語集・翻訳メモリなどがうまく使えていない
+    - 「良い翻訳」のノウハウが不足している
 
 ---
 
@@ -182,3 +394,13 @@ center: false
 <http://bit.ly/pandoc-jp>
 
 ---
+
+# おまけ
+
+---
+
+# この発表スライドを支える技術
+
+- Pandoc: HTMLスライドを出力 (reveal.js)
+- blockdiag (小宮さん)
+    - pandoc-blockdiag-filter
