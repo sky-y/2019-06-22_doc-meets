@@ -22,7 +22,7 @@ center: false
 # 今日お話しする内容
 
 - ドキュメント翻訳を支える技術
-    - 目的：Pandoc User's Guide（英文）を翻訳しユーザが見られるようにする
+    - 目的：[Pandoc User's Guide](https://pandoc.org/MANUAL.html)（英文）を翻訳しユーザが見られるようにする
     - いくつかの課題がある
 
 ---
@@ -36,6 +36,12 @@ center: false
     - コンテンツ（内容）とメタデータは**可能な限り**残す
     - スタイルはバッサリ捨てて、フォーマット $B$ に合わせる
 - オープンソースソフトウェア (GPL v2 or later)
+
+---
+
+# OSPN Pressの記事
+
+- [「オープンソース」を使ってみよう（第47回 Pandoc）](https://www.ospn.jp/press/20170705no52-useit-oss.html)
 
 ---
 
@@ -395,12 +401,11 @@ $ sphinx-intl update -p _build/gettext -l ja_JP  # Bad
 
 ---
 
-# おまけ
+# おまけ：この発表スライドを支える技術
 
----
+- Pandoc
+- reveal.js: HTMLスライド
 
-# この発表スライドを支える技術
-
-- Pandoc: HTMLスライドを出力 (reveal.js)
-- blockdiag (小宮さん)
-    - pandoc-blockdiag-filter
+```
+$ pandoc index.md -f markdown -t revealjs -o index.html -s -c custom.css 
+```

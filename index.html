@@ -58,7 +58,7 @@
 <ul>
 <li>ドキュメント翻訳を支える技術
 <ul>
-<li>目的：Pandoc User’s Guide（英文）を翻訳しユーザが見られるようにする</li>
+<li>目的：<a href="https://pandoc.org/MANUAL.html">Pandoc User’s Guide</a>（英文）を翻訳しユーザが見られるようにする</li>
 <li>いくつかの課題がある</li>
 </ul></li>
 </ul>
@@ -77,6 +77,12 @@
 <li>スタイルはバッサリ捨てて、フォーマット <span class="math inline"><em>B</em></span> に合わせる</li>
 </ul></li>
 <li>オープンソースソフトウェア (GPL v2 or later)</li>
+</ul>
+</section>
+<section id="ospn-pressの記事" class="slide level1">
+<h1>OSPN Pressの記事</h1>
+<ul>
+<li><a href="https://www.ospn.jp/press/20170705no52-useit-oss.html">「オープンソース」を使ってみよう（第47回 Pandoc）</a></li>
 </ul>
 </section>
 <section class="slide level1">
@@ -454,18 +460,13 @@ $ sphinx-intl update -p _build/gettext -l ja_JP  # Bad</code></pre>
 <p><img data-src="img/qr-pandoc-jp-slack.png" /></p>
 <p><a href="http://bit.ly/pandoc-jp" class="uri">http://bit.ly/pandoc-jp</a></p>
 </section>
-<section id="おまけ" class="slide level1">
-<h1>おまけ</h1>
-</section>
-<section id="この発表スライドを支える技術" class="slide level1">
-<h1>この発表スライドを支える技術</h1>
+<section id="おまけこの発表スライドを支える技術" class="slide level1">
+<h1>おまけ：この発表スライドを支える技術</h1>
 <ul>
-<li>Pandoc: HTMLスライドを出力 (reveal.js)</li>
-<li>blockdiag (小宮さん)
-<ul>
-<li>pandoc-blockdiag-filter</li>
-</ul></li>
+<li>Pandoc</li>
+<li>reveal.js: HTMLスライド</li>
 </ul>
+<pre><code>$ pandoc index.md -f markdown -t revealjs -o index.html -s -c custom.css </code></pre>
 </section>
     </div>
   </div>
